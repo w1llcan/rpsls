@@ -82,6 +82,10 @@ header > h2 {
   font-family: Asap, sans-serif;
 }
 
+img {
+  border-radius: 50%;
+}
+
 .choices {
   margin-top: 50px;
   text-align: center;
