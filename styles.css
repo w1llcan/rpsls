@@ -59,7 +59,8 @@ header > h1 {
   color: #03255A;
 }
 body {
-  background: url(https://i.imgur.com/TbR9G3x.png) no-repeat center center fixed; 
+  /* background: url(https://i.imgur.com/TbR9G3x.png) no-repeat center center fixed;  */
+  background: rgb(102, 90, 90);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
