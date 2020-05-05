@@ -14,17 +14,20 @@ const computerScore_span = document.getElementById("computer-score");
 const scoreboard_div = document.querySelector("scoreboard");
 const result_p = document.querySelector(".result >p");
 const player_label_div = document.querySelector("#player-label");
+const computer_label_div = document.querySelector('#computer-label');
 const round_label_div = document.getElementById("round-label");
 const rock_div = document.getElementById("rock");
 const paper_div = document.getElementById("paper");
 const scissors_div = document.getElementById("scissors");
+const lizard_div = document.getElementById("lizard");
+const spock_div = document.getElementById("spock");
 
 const getPlayerName = () => {
   player_label_div.innerHTML = `${name}`;
 }
 
 const getComputerChoice = () => {
-  const choices = ['Rock', 'Paper', 'Scissors'];
+  const choices = ['Rock', 'Paper','Scissors', 'Lizard', 'Spock'];
   const randomNumber = Math.floor(Math.random() * choices.length); 
   return choices[randomNumber];
 }
@@ -32,62 +35,76 @@ const getComputerChoice = () => {
 const winRound = (playerChoice, computerChoice) => {
   playerScore++;
   playerScore_span.innerHTML = playerScore;
-  const colorPlayerWord = name.fontcolor("green");
-  const colorMyWord = " MY choice was ".fontcolor("#00ff55");
-  const playerWinsHand = " wins! ".fontsize(6).fontcolor("#3300ff");
-  result_p.innerHTML = `${colorPlayerWord}${playerWinsHand}  ${colorMyWord} ${playerChoice} and the computer chose ${computerChoice}.`;
+  const colorMyWord = `${name}: `.fontcolor("#c9b31e");
+  const playerWinsHand = " wins! ".fontcolor("#3300ff");
+  result_p.innerHTML = `${colorMyWord}${playerWinsHand} <br> ${colorMyWord} ${playerChoice}<br> Computer: ${computerChoice}.`;
   player_label_div.innerHTML = `${name}`;
   currRound++;
-  round_label_div.innerHTML = `Round: ${currRound} / ${numRounds}`
+  round_label_div.innerHTML = `Round: ${currRound} / ${numRounds}`;
 }
-// Not working yet, will work on it later
-// const playerLabel = () => {
-//   if (this.name.length > 6 && name.length < 10)
-//   $('#player-label').css('left', '-65px')
-//   else if (this.name.length > 10 && name.length < 15)
-//   $('#player-label').css('left', '-75px')
-// }
-
 
 
 const loseRound = (playerChoice, computerChoice) => {
   computerScore++;
   playerScore_span.innerHTML = playerScore;
   computerScore_span.innerHTML = computerScore;
-  const colorCompWord = " computer ".fontcolor("#006600");
-  result_p.innerHTML = `The ${colorCompWord} wins! The computer chose ${computerChoice} and my choice was ${playerChoice}...`;
-  player_label_div.innerHTML = `${name}`;
+  const colorCompWord = " Computer".fontcolor("#c9b31e");
+  result_p.innerHTML = `The ${colorCompWord} wins!<br> ${colorCompWord}: ${computerChoice}<br> ${name}: ${playerChoice}`
   currRound++;
-  round_label_div.innerHTML = `Round: ${currRound} / ${numRounds}`
+  round_label_div.innerHTML = `Round: ${currRound} / ${numRounds}`;
 }
 
 const draw = (playerChoice, computerChoice) => {
-  const colorDrawWord = " It's a tie! ".fontcolor("#ff4000");
-  result_p.innerHTML = `${colorDrawWord}  The computer and I both chose ${computerChoice}.`;
+  const colorDrawWord = `It's a tie!`.fontcolor("#ff4000");
+  result_p.innerHTML = `${colorDrawWord}<br>${name}: ${playerChoice}<br>Computer: ${computerChoice}`;
   player_label_div.innerHTML = `${name}`;
   currRound++;
-  round_label_div.innerHTML = `Round: ${currRound} / ${numRounds}`
+  round_label_div.innerHTML = `Round: ${currRound} / ${numRounds}`;
 }
+
+
 
 const game = (playerChoice) => {
   const computerChoice = getComputerChoice();
   switch (playerChoice + computerChoice) {
-    case "RockScissors":
-    case "PaperRock":
     case "ScissorsPaper":
+    case "ScissorsLizard":
+    case "PaperRock":
+    case "PaperSpock":
+    case "RockScissors":
+    case "RockLizard":
+    case "LizardPaper":
+    case "LizardSpock":
+    case "SpockScissors":
+    case "SpockRock":
       winRound(playerChoice, computerChoice);
       break;
-    case "RockPaper":
-    case "PaperScissors":
     case "ScissorsRock":
-      loseROund(playerChoice, computerChoice);
+    case "ScissorsSpock":
+    case "PaperScissors":
+    case "PaperLizard":
+    case "RockPaper":
+    case "RockSpock":
+    case "LizardScissors":
+    case "LizardRock":
+    case "SpockPaper":
+    case "SpockLizard":
+      loseRound(playerChoice, computerChoice);
     break;
     case "RockRock":
     case "PaperPaper":
     case "ScissorsScissors":
+    case "LizardLizard":
+    case "SpockSpock":
       draw(playerChoice, computerChoice);
     break;
   }
+}
+
+const setEndRounds = () => {
+  let endPlays;
+
+
 }
 
 const main = () => {
@@ -99,6 +116,12 @@ const main = () => {
   })
   scissors_div.addEventListener('click', function() {
     game("Scissors");
+  })
+  lizard_div.addEventListener('click', function() {
+    game("Lizard");
+  })
+  spock_div.addEventListener('click', function() {
+    game("Spock");
   })
 }
 
